@@ -19,9 +19,11 @@ export function Navbar() {
   const openDrawer = useCart((s) => s.openDrawer);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const count = cartCount(lines);
+  const [mounted, setMounted] = useState(false);
+  const count = mounted ? cartCount(lines) : 0;
 
   useEffect(() => {
+    setMounted(true);
     const onScroll = () => setScrolled(window.scrollY > 16);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
